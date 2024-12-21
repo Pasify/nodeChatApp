@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   sendButton.addEventListener("click", () => {
     addMessages({ name: "billy Jekins", message: "Whats up my boy" });
   });
+  getMessages();
 });
 function addMessages(message) {
   let messageBox = document.querySelector("#messages");
@@ -10,5 +11,11 @@ function addMessages(message) {
     <h4>${message.name}</h4>
     <p>${message.message}</p>
     `;
-  messageBox.insertAdjacentHTML("afterbegin", messageContent);
+  messageBox.insertAdjacentHTML("beforeend", messageContent);
+}
+function getMessages() {
+  let response = fetch("http://localhost:3000/messages");
+  response
+    .then((data) => data.json())
+    .then((data) => data.forEach(addMessages));
 }
