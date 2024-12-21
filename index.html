@@ -16,7 +16,9 @@
         <div class="container mt-4">
             <div class="bg-body-secondary p-5 rounded-3 d-flex flex-column gap-3 mb-4">
                 <h1 class="display-4">Send Message</h1>
-                <input class="form-control" type="text" placeholder="name">
+                <input id="name" class="form-control" type="text" placeholder="Name">
+                <textarea name="message" id="message" placeholder="Enter your message" class="form-control "
+                    style="height: 120px;"></textarea>
                 <button class="btn btn-success align-self-start" id="send">Send</button>
             </div>
             <div id="messages"></div>
