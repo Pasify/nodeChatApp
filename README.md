@@ -2,8 +2,7 @@
 
 This project is a simple chat application built using Node.js, Express, and Socket.io. It allows users to send and receive messages in real-time.
 
-[Desktop view](./images/Desktop.PNG)
-[Mobile view](./images/mobile.PNG)
+![Desktop view](./images/Desktop.PNG) ![Mobile view](./images/mobile.PNG)
 
 ## Installation
 
@@ -140,7 +139,7 @@ function postMessage(message) {
 ## License
 
 ```md
-    Feel Free to contribute as this ia an open source project
+    Feel Free to contribute and use as this project is yet to obtain a valid license
 ```
 
 ---
