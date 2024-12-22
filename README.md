@@ -1,3 +1,81 @@
+# Chat Application
+
+This project is a simple chat application built using Node.js, Express, and Socket.io. It allows users to send and receive messages in real-time.
+
+[Desktop view](./images/Desktop.PNG)
+[Mobile view](./images/mobile.PNG)
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/chat-app.git
+   ```
+2. Navigate to the project directory:
+
+   ```powershell-interactive
+    cd chat-app
+   ```
+
+3. Install the dependencies:
+
+   ```powershell-interactive
+    npm install
+   ```
+
+## Usage
+
+1. Start the server
+   ```bash
+   node server.js
+   ```
+2. Open index.html in your browser to use the chat application.
+
+## Project Structure
+
+- server.js: Sets up the server and handles socket connections.
+
+- app.js: Manages the client-side logic for sending and receiving messages.
+
+**server.js**
+
+```javascript
+const express = require("express");
+const app = express();
+const http = require("http").Server(app);
+const io = require("socket.io")(http);
+const bodyParser = require("body-parser");
+
+app.use(bodyParser.json());
+app.use(express.static("public"));
+
+let messages = [];
+
+app.get("/messages", (req, res) => {
+  res.send(messages);
+});
+
+app.post("/messages", (req, res) => {
+  messages.push(req.body);
+  io.emit("message", req.body);
+  res.sendStatus(200);
+});
+
+io.on("connection", (socket) => {
+  console.log("a user connected");
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+  });
+});
+
+http.listen(3000, () => {
+  console.log(`server is listening on port ${http.address().port}`);
+});
+```
+
+**app.js**
+
+```javascript
 let socket = io();
 document.addEventListener("DOMContentLoaded", function () {
   let sendButton = document.querySelector("#send");
@@ -13,7 +91,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   getMessages();
 });
+
 socket.on("message", addMessage);
+
 function addMessage(message) {
   let messageBox = document.querySelector("#messages");
   let messageContent = `
@@ -28,14 +108,15 @@ function addMessage(message) {
        message.message
      }</p>
     </div>
-   
     `;
   messageBox.insertAdjacentHTML("beforeend", messageContent);
 }
+
 function getMessages() {
   let response = fetch("http://localhost:3000/messages");
   response.then((data) => data.json()).then((data) => data.forEach(addMessage));
 }
+
 function postMessage(message) {
   let response = fetch("http://localhost:3000/messages", {
     method: "POST",
@@ -46,7 +127,7 @@ function postMessage(message) {
   });
   response
     .then((response) => {
-      if (!response) {
+      if (!response.ok) {
         throw new Error("HTTP error, status: " + response.status);
       }
       return response.json();
@@ -54,3 +135,12 @@ function postMessage(message) {
     .then((data) => console.log(data))
     .catch((error) => console.error("Error:", error));
 }
+```
+
+## License
+
+```md
+    Feel Free to contribute as this ia an open source project
+```
+
+---

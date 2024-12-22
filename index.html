@@ -10,18 +10,30 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"></script>
+        <script src="/socket.io/socket.io.js"></script>
     </head>
 
     <body>
-        <div class="container mt-4">
-            <div class="bg-body-secondary p-5 rounded-3 d-flex flex-column gap-3 mb-4">
-                <h1 class="display-4">Send Message</h1>
+        <div class="container mt-3">
+            <div id="messages">
+                <!-- <div class="d-flex flex-column text-white gap-2">
+                    <div class="d-flex gap-2 align-items-center">
+                        <div
+                            class="bg-success-subtle  bg-gradient rounded-circle w-auto h-auto p-2 fw-semibold  text-success">
+                            JD </div>
+                        <span class="">Jon doe</span>
+                    </div>
+                    <p class="rounded w-auto h-auto bg-success bg-gradient p-2 fw-semibold align-self-start ms-5">how
+                        are you? </p>
+                </div> -->
+            </div>
+            <div class="bg-body-secondary p-3  rounded-3 d-flex flex-column gap-3 mb-3">
+                <!-- <h1 class="display-5">Send Message</h1> -->
                 <input id="name" class="form-control" type="text" placeholder="Name">
                 <textarea name="message" id="message" placeholder="Enter your message" class="form-control "
                     style="height: 120px;"></textarea>
                 <button class="btn btn-success align-self-start" id="send">Send</button>
             </div>
-            <div id="messages"></div>
         </div>
     </body>
     <script src="app.js"></script>
